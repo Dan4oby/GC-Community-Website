@@ -6,25 +6,25 @@ set "URL=https://github.com/ElyPrismLauncher/Launcher/releases/download/11.0.2/P
 set "APP=ElyPrismLauncher"
 set "APP_DIR=%APPDATA%\%APP%"
 
-:: ПРОВЕРКА СУЩЕСТВОВАНИЯ TAR
+:: TAR ARCHIVER EXIST
 where tar >nul 2>&1 || call :fail "Bat cant work on this PC. URL: %URL%"
 
-:: ЗАКРЫТИЕ ЛАУНЧЕРА
+:: CLOSE LAUNCHER
 taskkill /IM %APP%.exe /F >nul 2>&1
 tasklist | find /I "%APP%.exe" >nul && call :fail "Close %APP% and launch again"
 
-:: СКАЧИВАНИЕ ЧЕРЕЗ CURL, ИНАЧЕ - POWERSHELL
+:: DOWNLOAD VIA CURL OR VIA POWERSHELL
 echo Downloading %APP%...
 curl -L -# -o %APP%.zip "%URL%" || (
     powershell -nop -c "[Net.ServicePointManager]::SecurityProtocol=3072;(New-Object Net.WebClient).DownloadFile('%URL%','%APP%.zip')" || call :fail "Download error"
 )
 
-:: РАСПАКОВКА
+:: UNPACK
 mkdir "%APP_DIR%" 2>nul
 tar -xf %APP%.zip -C "%APP_DIR%"
 del %APP%.zip
 
-:: СОЗДАНИЕ КОНФИГА
+:: CREATE LAUNCHER CONFIG
 > "%APP_DIR%\%APP%.cfg" (
     echo [General]
     echo ConfigVersion=1.3
@@ -48,7 +48,7 @@ del %APP%.zip
     echo Language=ru
 )
 
-:: РЕГИСТРАЦИЯ ПРОТОКОЛОВ ДЛЯ ФИЧИ ИМПОРТА ПО ССЫЛКЕ
+:: URL PROTOCOL REGISTRATION
 reg add "HKCU\Software\Classes\curseforge" /v "URL Protocol" /t REG_SZ /d "" /f
 reg add "HKCU\Software\Classes\curseforge\shell\open\command" /ve /t REG_SZ /d "\"%APP_DIR%\%APP%.exe\" \"%%1\"" /f
 
@@ -58,7 +58,7 @@ reg add "HKCU\Software\Classes\%APP%\shell\open\command" /ve /t REG_SZ /d "\"%AP
 reg add "HKCU\Software\Classes\prismlauncher" /v "URL Protocol" /t REG_SZ /d "" /f
 reg add "HKCU\Software\Classes\prismlauncher\shell\open\command" /ve /t REG_SZ /d "\"%APP_DIR%\%APP%.exe\" \"%%1\"" /f
 
-:: СОЗДАНИЕ ЯРЛЫКА
+:: LNK CREATION
 set "PRISM_PATH=%APP_DIR%\%APP%.exe"
 set "SHORTCUT=%USERPROFILE%\Desktop\PrismLauncher.lnk"
 
