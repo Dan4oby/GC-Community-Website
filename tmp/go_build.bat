@@ -1,1 +1,0 @@
-go build -ldflags="-s -w" -trimpath -o PrismLauncher-11.0.2-Win-Setup-Fast.exe installer.go
