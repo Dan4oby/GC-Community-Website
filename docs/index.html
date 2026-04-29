@@ -22,9 +22,159 @@ vertical-align: middle;
 }
 .display.math{display: block; text-align: center; margin: 0.5rem auto;}
 </style>
-  <style type="text/css">body {font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;max-width: 800px;margin: 2rem auto;padding: 0 1rem;line-height: 1.5;color: #1a1a1a;background: #fafafa;}blockquote {margin: 1rem 0;padding: 0.5rem 1rem;background: #e6f8ff;border-left: 7px solid #44e3e9;border-radius: 0.5rem;color: #000000;}h3 {font-size: 1.6rem;font-weight: 600;color: #1e293b;border-left: 5px solid #4f46e5;padding-left: 1rem;margin: 2rem 0 1rem;}code {background: #e7e7e7;padding: 0.2rem 0.4rem;border-radius: 0.25rem;font-family: 'SF Mono', Monaco, Consolas, monospace;font-size: 0.9em;}li a {display: block;width: 100%;text-align: center;font-size: 1.05rem;background: #ffffff;border: 1px solid #e0e7ef;}a {text-decoration: none;color: #1e293b;background: white;padding: 0.2rem 0.5rem;border-radius: 10px;transition: 0.2s ease;display: inline-block;font-weight: 500;border: 1px solid #e2e8f0;box-shadow: 0 1px 2px rgba(0, 0, 0, 0.02);}li a:hover {background: #4f46e5;color: white;}pre {background: #a2a2a8;color: #f8f8f2;padding: 1rem;border-radius: 0.5rem;overflow-x: auto;font-family: 'SF Mono', Monaco, Consolas, monospace;font-size: 0.85rem;line-height: 1.4;margin: 1rem 0;}pre code {background: none;padding: 0;color: inherit;}strong {color: #dc2626;}</style>
+  <style type="text/css">body {font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;max-width: 800px;margin: 2rem auto;padding: 0 1rem;line-height: 1.5;color: #1a1a1a;background: #fafafa;zoom: 110%;}blockquote {margin: 1rem 0;padding: 0.5rem 1rem;background: #e6f8ff;border-left: 7px solid #44e3e9;border-radius: 0.5rem;color: #000000;}h3 {font-size: 1.6rem;font-weight: 600;color: #1e293b;border-left: 5px solid #4f46e5;padding-left: 1rem;margin: 2rem 0 1rem;}code {background: #e7e7e7;padding: 0.2rem 0.4rem;border-radius: 0.25rem;font-family: 'SF Mono', Monaco, Consolas, monospace;font-size: 0.9em;}li a {display: block;width: 100%;text-align: center;font-size: 1.05rem;background: #ffffff;border: 1px solid #e0e7ef;}ul {list-style: none; padding-left: 0; margin-left: 0;}a {text-decoration: none;color: #1e293b;background: white;padding: 0.2rem 0.5rem;border-radius: 10px;transition: 0.2s ease;display: inline-block;font-weight: 500;border: 1px solid #e2e8f0;box-shadow: 0 1px 2px rgba(0, 0, 0, 0.02);}li a:hover {background: #4f46e5;color: white;}pre {background: #a2a2a8;color: #f8f8f2;padding: 1rem;border-radius: 0.5rem;overflow-x: auto;font-family: 'SF Mono', Monaco, Consolas, monospace;font-size: 0.85rem;line-height: 1.4;margin: 1rem 0;}pre code {background: none;padding: 0;color: inherit;}strong {color: #dc2626;}</style>
 </head>
 <body>
+<style>
+
+.main-header {
+background: linear-gradient(135deg, #1a2a3a, #0f1a24);
+color: white;
+padding: 0 1.5rem;
+box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+position: sticky;
+top: 0;
+z-index: 100;
+font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+width: 100%;
+margin: 0;
+left: 0;
+}
+.nav-container {
+max-width: 1200px;
+margin: 0 auto;
+display: flex;
+align-items: center;
+justify-content: space-between;
+flex-wrap: nowrap;
+}
+.logo a {
+color: white !important;
+text-decoration: none;
+font-size: 1.3rem;
+font-weight: bold;
+background: transparent !important;
+border: none !important;
+box-shadow: none !important;
+padding: 0.6rem 0;
+display: inline-block;
+}
+.logo a:hover {
+opacity: 0.8;
+background: transparent !important;
+color: white !important;
+}
+.nav-menu {
+display: flex;
+gap: 1.2rem;
+list-style: none;
+margin: 0;
+padding: 0;
+}
+.nav-item {
+position: relative;
+}
+.nav-item > a {
+color: white !important;
+text-decoration: none;
+font-size: 1rem;
+font-weight: 500;
+padding: 0.6rem 0.3rem;
+display: inline-block;
+background: transparent !important;
+border: none !important;
+border-bottom: 2px solid transparent;
+border-radius: 0 !important;
+box-shadow: none !important;
+width: auto !important; 
+text-align: left;
+}
+.nav-item > a:hover {
+color: #ffd966 !important;
+border-bottom-color: #ffd966;
+background: transparent !important;
+}
+
+.nav-item > a::before,
+.nav-item > a::after,
+.nav-menu li::before,
+.nav-menu li::after {
+content: none !important;
+}
+.dropdown-menu {
+position: absolute;
+top: 100%;
+left: 0;
+background-color: #fff;
+min-width: 180px;
+list-style: none;
+border-radius: 8px;
+box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+padding: 0.4rem 0;
+opacity: 0;
+visibility: hidden;
+transform: translateY(-8px);
+transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s;
+z-index: 200;
+}
+.nav-item.dropdown:hover .dropdown-menu {
+opacity: 1;
+visibility: visible;
+transform: translateY(0);
+}
+.dropdown-menu li a {
+display: block;
+padding: 0.5rem 1rem;
+color: #1e2a36 !important;
+text-decoration: none;
+font-size: 0.9rem;
+background: transparent !important;
+border: none !important;
+border-radius: 0 !important;
+box-shadow: none !important;
+width: auto !important;
+text-align: left;
+}
+.dropdown-menu li a:hover {
+background-color: #eef2f7 !important;
+color: #0f5b7a !important;
+}
+@media (max-width: 600px) {
+.nav-container {
+flex-wrap: wrap;
+}
+.nav-menu {
+flex-wrap: wrap;
+gap: 0.6rem;
+}
+.dropdown-menu li a {
+white-space: normal;
+}
+}
+</style>
+
+<header class="main-header">
+    <div class="nav-container">
+        <div class="logo">
+            <a href="#">GC</a>
+        </div>
+        <ul class="nav-menu">
+            <li class="nav-item">
+                <a href="index.html">Главная</a>
+            </li>
+            <li class="nav-item dropdown">
+                <a href="#">Контент GC</a>
+                <ul class="dropdown-menu">
+                    <li><a href="fof.html">Fistful of Frags</a></li>
+                    <li><a href="gclauncher.html">GCLauncher</a></li>
+                </ul>
+            </li>
+            <li class="nav-item">
+                <a href="zerotier.html">Zerotier</a>
+            </li>
+        </ul>
+    </div>
+</header>
 <h1 id="контент-gc">Контент GC</h1>
 <ul>
 <li><p><a href="fof.html">Fistful of Frags</a></p></li>
